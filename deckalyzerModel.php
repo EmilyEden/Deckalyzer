@@ -93,7 +93,7 @@
 				$this->error = $mysqli->error;
 			}
 
-			return array($cards)
+			return array($cards);
 		}
 
 		public function editCard(){
@@ -124,8 +124,9 @@
 			if (!$result = $this->mysqli->query($sql)){
 				$this->error = $this->mysqli->error;
 			}
-			
+
 			return $this->error;
 		}
+	}
 
 ?>
