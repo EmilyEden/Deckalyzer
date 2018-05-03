@@ -29,27 +29,51 @@
 			return $this->user;
 		}
 
-		public function login($loginID, $password){
-
+		public function login($loginID, $password)
+		{
+			$user = new User();
+			if($user->load($loginID, $this->mysqli) and password_verify($password, $user->hashedPassword))
+			{
+				$this->user = $user;
+				$_SESSION['loginid'] = $loginID;
+				return array(true, "");
+			}
+			else
+			{
+				$this->user = null;
+				$_SESSION['loginid'] = '';
+				return array(false, "Invaild login information. Please try again.");
+			}
+				
+		}
+		
+		public function logout()
+		{
+			$this->user = null;
+			$_SESSION['loginid'] = '';
 		}
 
 		public function addCard($data){
 			$this->error = '';
 
-			// if(!$this->user){
-			// 	$this->error = "No user specified. Could not add card";
-			// 	return $this->error;
-			// }
+			if(!$this->user){
+				$this->error = "No user specified. Could not add card";
+				return $this->error;
+			}
 
 			$name = $data['name'];
+			// $quantity = $data['$quantity'];
+			// $forTrade = $data['forTrade'];
+
 			if(!$name){
 				$this->error = "No card name specified. Could not add card";
 				return $this->error;
 			}
 
 			$nameEscaped = $this->mysqli->real_escape_string($name);
-			$userIDEscaped = $this->mysqli->real_escape_string(1);//THIS IS HARD CODED!!!!!!
-
+			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
+			// $quantityEscaped = $this->mysqli->real_escape_string($quantity);
+			// $forTradeEscaped = $this->mysqli->real_escape_string($forTrade);
 
 			$sql = "INSERT INTO cards (name, ownerId) VALUES ('$nameEscaped', '$userIDEscaped')";
 
@@ -66,65 +90,44 @@
 
 		public function getCardCollection(){
 			$this->error = '';
-			$cards = array();
-
-			if (!$this->user) {
-				$this->error = "User not specified. Unable to get cards.";
-				return $this->error;
-			}
-
-			if (!$this->mysqli) {
-				$this->error = "No connection to database. Could not get cards";
-				return array($cards, $this->error);
-			}
-
-			$nameEscaped = $this->mysqli->real_escape_string($name);
-			$userIDEscaped = $this->mysqli->real_escape_string(1);//THIS IS HARD CODED!!!!!!
-
-			$sql = "SELECT * FROM cards WHERE userID = $userIDEscaped";
-			if($result = $this->mysqli->query($sql)){
-				if($result->num_rows > 0){
-					while($row = $result->fetch_assoc()) {
-						array_push($tcards, $row);
-					}
-				}
-				$result->close();
-			} else {
-				$this->error = $mysqli->error;
-			}
-
-			return array($cards);
 		}
 
 		public function editCard(){
 			$this->error = '';
 		}
 
-		public function deleteCard($id){
+		public function deleteCard($id)
+		{
 			$this->error = '';
-			if (!$this->user){
+			
+			if (!$this->user)
+			{
 				$this->error = "User not specified. Unable to delete card.";
 				return $this->error;
 			}
-
-			if(!$this->mysqli){
+			
+			if(!$this->mysqli)
+			{
 				$this->error = "No connection to database. Unable to delete card.";
 				return $this->error;
 			}
-
-			if(!$id){
+			
+			if(!$id)
+			{
 				$this->error = "No id specified for card to delete.";
-				return $this->error;
-			}
-
+				return $this->error;			
+			}			
+		
 			$idEscaped = $this->mysqli->real_escape_string($id);
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 			$sql = "DELETE FROM cards WHERE ownerID = $userIDEscaped AND id = $idEscaped";
-
-			if (!$result = $this->mysqli->query($sql)){
+			if (!$result = $this->mysqli->query($sql))
+			{
 				$this->error = $this->mysqli->error;
 			}
 			
 			return $this->error;
 		}
-}
+	}
+
+?>
