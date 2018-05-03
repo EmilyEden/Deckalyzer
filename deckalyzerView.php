@@ -25,6 +25,7 @@
 				}
 				
 				$body .= "<p><a class='taskButton' href='index.php?view=cardform'>+ Add Card</a></p>\n";
+				$body .= "<p><a class='taskButton' href='index.php?view=cardform'>+ Delete Card</a></p>\n";
 				
 				if (count($cards) < 1)
 				{
