@@ -13,16 +13,16 @@ class user {
 			return false;
 		}
 		
-		$loginIDEscaped = $mysqli->real_escape_string($loginID);
+		$loginIDEscaped = $mysqli->real_escape_string($userName);
 	
-		$sql = "SELECT * FROM users WHERE loginID = '$loginIDEscaped'";
+		$sql = "SELECT * FROM users WHERE loginID = '$userNameEscaped'";
 		
 		if ($result = $mysqli->query($sql))
 		{
 			if ($result->num_rows > 0)
 			{
 				$user = $result->fetch_assoc();
-				$this->userName = $user['loginID'];
+				$this->userName = $user['userName'];
 				$this->userID = $user['id'];
 			}
 			$result->close();
