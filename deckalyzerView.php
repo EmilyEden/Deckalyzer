@@ -149,6 +149,7 @@ EOT2;
 <input type="submit" name='Submit' value="Login">
 </form>
 EOT;
+			$selectOption = $_POST['userId'];
 			return $this->page($body);
 			
 		}
