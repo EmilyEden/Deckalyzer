@@ -34,7 +34,7 @@
 			$user = new user();
 			if($user->load($userId)){
 				$this->user = $user;
-				return(true, "");
+				return array(true, "");
 			} else {
 				$this->user = null;
 				return array(false, "Could not select user");
