@@ -36,8 +36,8 @@ class user {
 	
 	private function clear()
 	{
-		$userName = '';
-		$userID = 0;
+		$this->userName = '';
+		$this->userID = 0;
 	}
 }
 
