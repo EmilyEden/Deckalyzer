@@ -16,7 +16,7 @@
 			$this->model = new deckalyzerModel();
 			$this->views = new deckalyzerView();
 
-			$this->view = $_GET['view'] ? $_GET['view'] : 'cardlist';
+			$this->view = $_GET['view'] ? $_GET['view'] : 'loginform';
 			$this->action = $_POST['action'];
 		}
 
