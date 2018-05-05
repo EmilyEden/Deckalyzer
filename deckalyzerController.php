@@ -29,7 +29,7 @@
 
 			switch($this->action) {
 				case 'delete':
-					$this->handleDelete();
+					$this->handleDeleteCard();
 					break;
 				case 'add':
 					$this->handleAddCard();
@@ -39,6 +39,19 @@
 					break;
 				case 'update':
 					$this->handleUpdateCard();
+					break;
+
+				case 'deleteD'
+					$this->handleDeleteDeck();
+					break;
+				case 'addD'
+					$this->handleAddDeck();
+					break;
+				case 'editD'
+					$this->handleEditDeck();
+					break;
+				case 'updateD'
+					$this->handleUpdateDeck();
 					break;
 
 			}
@@ -71,7 +84,7 @@
 			}
 		}
 
-		private function handleDelete() {
+		private function handleDeleteCard() {
 			if ($error = $this->model->deleteCard($_POST['id'])) {
 				$this->message = $error;
 			}
@@ -109,7 +122,57 @@
 				return;
 			}
 
-			if ($error = $this->model->updateCard($_POST)) {
+			if ($error = $this->model->editCard($_POST)) {
+				$this->message = $error;
+				$this->view = 'cardform';
+				$this->data = $_POST;
+				return;
+			}
+
+			$this->view = 'cardlist';
+		}
+
+		//***************************************************************DECKS***************************************************
+
+		private function handleDeleteDeck() {
+			if ($error = $this->model->deleteCard($_POST['id'])) {
+				$this->message = $error;
+			}
+			$this->view = 'cardlist';
+		}
+
+		private function handleAddDeck() {
+			if ($_POST['cancel']) {
+				$this->view = 'cardlist';
+				return;
+			}
+
+			$error = $this->model->addDeck($_POST);
+			if ($error) {
+				$this->message = $error;
+				$this->view = 'cardform';
+				$this->data = $_POST;
+			}
+		}
+
+		private function handleEditDeck() {
+			list($task, $error) = $this->model->getCard($_POST['id']);
+			if ($error) {
+				$this->message = $error;
+				$this->view = 'cardlist';
+				return;
+			}
+			$this->data = $task;
+			$this->view = 'cardform';
+		}
+
+		private function handleUpdateDeck() {
+			if ($_POST['cancel']) {
+				$this->view = 'cardlist';
+				return;
+			}
+
+			if ($error = $this->model->editCard($_POST)) {
 				$this->message = $error;
 				$this->view = 'cardform';
 				$this->data = $_POST;
