@@ -43,7 +43,9 @@
 
 		public function addCard($user, $data){
 			$this->error = '';
-
+			
+			$this->user = $user;
+			
 			 if(!$this->user)
 			 {
 			 	$this->error = "No user specified. Could not add card";
