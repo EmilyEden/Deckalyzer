@@ -37,7 +37,7 @@
 				return array(true, "");
 			} else {
 				$this->user = null;
-				return array(false, "Could not select user");
+				return array(false, $userId);
 			}
 		}
 
