@@ -1,0 +1,67 @@
+body 
+{
+	margin: 10px;
+	background-color: #e7e3ed;
+	font-family: arial;
+}
+
+table, th, td
+{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th, td
+{
+	padding: 4px;
+}
+
+th
+{
+	background-color: #a292b5;
+}
+
+td
+{
+	background-color: #cbb7e2;
+}
+
+a.taskButton:link, a.taskButton:visited, a.taskButton:active
+{
+	color: black;
+	font-size:1.2em;
+	text-decoration: none;
+	background-color: #b49fcc;
+	padding: 5px;
+	border: 1px solid #cbb7e2;
+}
+
+a.taskButton:hover
+{
+	background-color:#cbb72e;
+}
+
+form
+{
+	background-color: #cbb7e2;
+	border: 1px solid #b49fcc;
+	padding: 5px;
+}
+
+p.message 
+{
+	color: red;
+	padding: 4px;
+	border: 1px solid red;
+}
+
+a.order:link, a.order:visited, a.order:active
+{
+	color:white;
+	text-decoration: none;
+}
+
+a.order:hover
+{
+	color: #b39fcc;
+}
