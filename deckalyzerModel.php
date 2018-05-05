@@ -2,6 +2,7 @@
 	/**
 	 *
 	 */
+	require('user.php');
 	class deckalyzerModel{
 		private $error = '';
 		private $mysqli;
