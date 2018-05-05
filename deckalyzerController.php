@@ -55,7 +55,7 @@
 					break;
 				default: // 'cardlist'
 					//list($orderBy, $orderDirection) = $this->model->getOrdering();
-					list($cards, $error) = $this->model->getCardCollection();
+					list($cards, $error) = $this->model->getCardCollection(this->model->getUser());
 					if ($error) {
 						$this->message = $error;
 					}
@@ -88,7 +88,7 @@
 				return;
 			}
 
-			$error = $this->model->addCard($_POST);
+			$error = $this->model->addCard($this->model->getuser(),$_POST);
 			if ($error) {
 				$this->message = $error;
 				$this->view = 'cardform';
