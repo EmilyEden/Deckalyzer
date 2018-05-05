@@ -126,7 +126,7 @@ EOT2;
 		
 		public function loginFormView($message = '')
 		{			
-			$body = "<h1>Tasks</h1>\n";
+			$body = "<h1>Cards Login Page</h1>\n";
 			
 			if ($message)
 			{
