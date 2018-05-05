@@ -100,8 +100,8 @@
 
 
 					$body .= "<tr>";
-					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
-					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
+					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='deleteD' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
+					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='editD' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
 					$body .= "<td>$deckName</td>";
 					$body .= "</tr>\n";
                 }
