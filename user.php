@@ -1,13 +1,15 @@
 <?php
 
-class User {
+class user {
 	public $loginID = '';
 	public $userID = 0;
 	
-	public function load($loginID, $mysqli) {
+	public function load($loginID, $mysqli)
+	{
 		$this->clear();
 	
-		if (! $mysqli) {
+		if (! $mysqli)
+		{
 			return false;
 		}
 		
