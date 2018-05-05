@@ -15,7 +15,7 @@
 
 			}
 
-			public function cardListView($cards, $orderBy = 'cardName', $orderDirection = 'asc', $message = '')
+			public function cardListView($cards, $decks, $orderBy = 'cardName', $orderDirection = 'asc', $message = '')
 			{
 				$body = "<h1>Cards</h1>\n";
 
@@ -24,22 +24,19 @@
 					$body .= "<p class ='message'>$message</p>\n";
 				}
 
-				$body .= "<p><a class='taskButton' href='index.php?view=cardform'>+ Add Card</a></p>\n";
-				$body .= "<p><a class='taskButton' href='index.php?view=cardform'>+ Delete Card</a></p>\n";
+				$body .= "<p><a class='taskButton' href='index.php?view=cardform'>+ Add Card</a>";
+				$body .= "<p><a class='taskButton' href='index.php?view=deckform'>+ Add Deck</a></p>\n";
 
 				if (count($cards) < 1)
 				{
-					$body .= "<p>You don't have cards loser.</p>\n";
+					$body .= "<p>You don't have cards! You can fix that by clicking +Add Card. Or don't. Whatever.</p>\n";
 					return $body;
 				}
 
-				$body .= "<table>\n";
-				$body .= "<tr><th>delete</th><th>for trade</th>";
+				$body .= "<span><table>\n";
+				$body .= "<tr><th>Delete</th><th>Edit</th>";
 
-				$columns = array(array('name' => 'cardName', 'label' => 'Card Name'),
-								 array('name' => 'wishlist', 'label' => 'Wishlist'));
-
-
+				$columns = array(array('name' => 'cardName', 'label' => 'Card Name'));
 
 				foreach ($columns as $column)
 				{
@@ -63,16 +60,55 @@
 				{
 					$id = $card['id'];
 					$cardName = $card['name'];
-					$ownerId = $card['ownerId'];
 
 
 					$body .= "<tr>";
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
-					$body .= "<td>$cardName</td><td>$ownerId</td>";
+					$body .= "<td>$cardName</td>";
 					$body .= "</tr>\n";
                 }
-			$body .= "</table>\n";
+			$body .= "</table></span>\n";
+			
+			$body .= "<span><table>\n";
+			$body .= "<tr><th>Delete</th><th>Edit</th>";
+			
+			$columns = array(array('name' => 'deckName', 'label' => 'Deck Name'));
+			
+			foreach ($columns as $column)
+				{
+					$name = $column['name'];
+					$label = $column['label'];
+					if ($name == $orderBy)
+					{
+						if ($orderDirection == 'asc')
+						{
+							$label .= " &#x25BC;";
+						}
+						else
+						{
+							$label .= " &#x25B2;";
+						}
+					}
+					$body .= "<th><a class='order' href='index.php?orderby=$name'>$label</a></th>";
+				}
+				
+			foreach($decks as $deck)
+				{
+					$id = $deck['id'];
+					$deckName = $deck['name'];
+
+
+					$body .= "<tr>";
+					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
+					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
+					$body .= "<td>$deckName</td>";
+					$body .= "</tr>\n";
+                }
+			
+			
+			
+			$body .= "</table></span>\n";
 
 			return $this->page($body);
 		}
@@ -126,32 +162,54 @@ EOT2;
 			print $html;
 		}
 		
-		public function loginFormView($message = '')
-		{			
-			$body = "<h1>Tasks</h1>\n";
-			
-			if ($message)
+		
+		public function deckFormView($data = null, $message = '')
+		{
+			$deckName = '';
+
+			if($data)
 			{
-				$body .= "<p class='message'>$message</p>\n";
+				$deckName = $data['deckName'];
 			}
-			
-			$body .= <<<EOT
-<form action='index.php' method='post'>
-<input type='hidden' name='action' value='login' />
-<p>Select User<br />
-	<select>
-		<option value="1">Emily Eden</option>
-		<option value="2">Warren Allen</option>
-		<option value="3">Luke Fisher</option>
-		<option value="4">Dale Musser</option>
-		<option value="5">Boo the Dog</option>
-	</select>
-	
-<input type="submit" name='Submit' value="Login">
+
+			$html = <<<EOT1
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cards and Deck Manager</title>
+<link rel="stylesheet" type="text/css" href="deckalyzer.css">
+</head>
+<body>
+<h1>Cards and Decks</h1>
+EOT1;
+
+
+			if($message)
+			{
+				$html .= "<p class='message'>$message</p>\n";
+			}
+
+			$html .= "<form action='index.php' method='post'>";
+
+			if($data['id'])
+			{
+				$html .="<input type='hidden' name='action' value='updateD' />";
+				$html .= "<input type='hidden' name='id' value='{$data['id']}' />";
+			}
+			else
+			{
+				$html .= "<input type='hidden' name='action' value='addD' />";
+			}
+
+			$html .= <<<EOT2
+	<p>Deck Name<br />
+	<input type="text" name="name" value="$name" placeholder="Deck Name" maxlength="255" size="80"></p>
+	<input type="submit" name='submit' value="Submit">
 </form>
-EOT;
-			return $this->page($body);
-			
+</body>
+</html>
+EOT2;
+			print $html;
 		}
 
 		private function page($body) {
@@ -164,7 +222,7 @@ EOT;
 </head>
 <body>
 $body
-<p>&copy; 2018 EmilyWarrenLuke EdenAllenFisher. All rights reserved, nerds. Ha.</p>
+<p>&copy; 2018 Warren Allen, Emily Eden, and Luke Fisher. All rights reserved. Yeet.</p>
 </body>
 </html>
 EOT;
