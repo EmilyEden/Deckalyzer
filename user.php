@@ -36,7 +36,7 @@ class user {
 	
 	private function clear()
 	{
-		$loginID = '';
+		$userName = '';
 		$userID = 0;
 	}
 }
