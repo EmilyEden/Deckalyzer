@@ -1,10 +1,10 @@
 <?php
 
 class user {
-	public $loginID = '';
+	public $userName = '';
 	public $userID = 0;
 	
-	public function load($loginID, $mysqli)
+	public function load($userName, $mysqli)
 	{
 		$this->clear();
 	
@@ -22,7 +22,7 @@ class user {
 			if ($result->num_rows > 0)
 			{
 				$user = $result->fetch_assoc();
-				$this->loginID = $user['loginID'];
+				$this->userName = $user['loginID'];
 				$this->userID = $user['id'];
 			}
 			$result->close();
