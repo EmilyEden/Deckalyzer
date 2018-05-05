@@ -103,7 +103,7 @@ EOT1;
 				$html .= "<p class='message'>$message</p>\n";
 			}
 
-			$html .= "<form action='index.php' method='post'>";
+			$html .= "<form action='index.php?view=cardhome' method='post'>";
 
 			if($data['id'])
 			{
