@@ -49,6 +49,7 @@
 					break;
 				case 'loginform':
 					print $this->views->loginFormView($this->message);
+					break;
 				default: // 'cardlist'
 					//list($orderBy, $orderDirection) = $this->model->getOrdering();
 					list($cards, $error) = $this->model->getCardCollection();
