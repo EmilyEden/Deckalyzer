@@ -145,7 +145,7 @@
 		//***************************************************************DECKS***************************************************
 
 		private function handleDeleteDeck() {
-			if ($error = $this->model->deleteCard($_POST['id'])) {
+			if ($error = $this->model->deleteDeck($_POST['id'])) {
 				$this->message = $error;
 			}
 			$this->view = 'cardlist';
