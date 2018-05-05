@@ -33,10 +33,9 @@
 				}
 
 				$body .= "<table>\n";
-				$body .= "<tr><th>delete</th><th>for trade</th>";
+				$body .= "<tr><th>Delete</th><th>Edit</th>";
 
-				$columns = array(array('name' => 'cardName', 'label' => 'Card Name'),
-								 array('name' => 'wishlist', 'label' => 'Wishlist'));
+				$columns = array(array('name' => 'cardName', 'label' => 'Card Name'));
 
 
 
@@ -68,7 +67,7 @@
 					$body .= "<tr>";
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
-					$body .= "<td>$cardName</td><td>$ownerId</td>";
+					$body .= "<td>$cardName</td>";
 					$body .= "</tr>\n";
                 }
 			$body .= "</table>\n";
@@ -138,12 +137,11 @@ EOT2;
 <form action='index.php' method='post'>
 <input type='hidden' name='action' value='login' />
 <p>Select User<br />
-	<select>
+	<select name="userId">
 		<option value="1">Emily Eden</option>
 		<option value="2">Warren Allen</option>
 		<option value="3">Luke Fisher</option>
 		<option value="4">Dale Musser</option>
-		<option value="5">Boo the Dog</option>
 	</select>
 	
 <input type="submit" name='Submit' value="Login">
