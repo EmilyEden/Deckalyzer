@@ -47,6 +47,8 @@
 				case 'cardform':
 					print $this->views->cardFormView($this->data, $this->message);
 					break;
+				case 'loginform':
+					print $this->views->loginFormView($this->message);
 				default: // 'cardlist'
 					//list($orderBy, $orderDirection) = $this->model->getOrdering();
 					list($cards, $error) = $this->model->getCardCollection();
@@ -55,10 +57,19 @@
 					}
 					print $this->views->cardListView($cards, $orderBy, $orderDirection, $this->message);
 			}
-
-
 		}
 
+		private function handleLogin() {
+			$userId = $_POST['userId'];
+
+			list($success, $message) = $this->model->loadUser($userId);
+			if ($success) {
+				$this->view = 'cardList';
+			} else {
+				$this->message = $message;
+				$this->view = 'loginform';
+			}
+		}
 
 		private function handleDelete() {
 			if ($error = $this->model->deleteCard($_POST['id'])) {

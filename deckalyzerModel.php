@@ -29,8 +29,15 @@
 			return $this->user;
 		}
 
-		public function login($loginID, $password){
-
+		public function loadUser($userId){
+			$user = new user();
+			if($user->load($userId)){
+				$this->user = $user;
+				return(true, "");
+			} else {
+				$this->user = null;
+				return array(false, "Could not select user");
+			}
 		}
 
 		public function addCard($data){
@@ -147,7 +154,7 @@
 			}
 
 			$name = $data['name'];
-			if (! $name) {
+			if (!$name) {
 				$this->error = "No card name. Unable to update card";
 				return $this->error;
 			}
@@ -192,5 +199,5 @@
 			return $this->error;
 		}
 
-		
+
 }
