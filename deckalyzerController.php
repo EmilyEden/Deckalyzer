@@ -60,8 +60,12 @@
 				case 'cardform':
 					print $this->views->cardFormView($this->data, $this->message);
 					break;
+				case 'deckform':
+					print $this->views->deckFormView($this->data, $this->message);
+					break;
 				case 'loginform':
 					print $this->views->loginFormView($this->message);
+					break;
 				default: // 'cardlist'
 					//list($orderBy, $orderDirection) = $this->model->getOrdering();
 					list($cards, $error) = $this->model->getCardCollection();
@@ -150,20 +154,20 @@
 			$error = $this->model->addDeck($_POST);
 			if ($error) {
 				$this->message = $error;
-				$this->view = 'cardform';
+				$this->view = 'deckform';
 				$this->data = $_POST;
 			}
 		}
 
 		private function handleEditDeck() {
-			list($task, $error) = $this->model->getCard($_POST['id']);
+			list($task, $error) = $this->model->getDeck($_POST['id']);
 			if ($error) {
 				$this->message = $error;
 				$this->view = 'cardlist';
 				return;
 			}
 			$this->data = $task;
-			$this->view = 'cardform';
+			$this->view = 'deckform';
 		}
 
 		private function handleUpdateDeck() {
@@ -172,9 +176,9 @@
 				return;
 			}
 
-			if ($error = $this->model->editCard($_POST)) {
+			if ($error = $this->model->editDeck($_POST)) {
 				$this->message = $error;
-				$this->view = 'cardform';
+				$this->view = 'deckform';
 				$this->data = $_POST;
 				return;
 			}
