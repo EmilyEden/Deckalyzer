@@ -4,7 +4,7 @@ class user {
 	public $userName = '';
 	public $userID = 0;
 	
-	public function load($userName, $mysqli)
+	public function load($userID, $mysqli)
 	{
 		$this->clear();
 	
@@ -13,9 +13,9 @@ class user {
 			return false;
 		}
 		
-		$loginIDEscaped = $mysqli->real_escape_string($userName);
+		$loginIDEscaped = $mysqli->real_escape_string($userID);
 	
-		$sql = "SELECT * FROM users WHERE loginID = '$userNameEscaped'";
+		$sql = "SELECT * FROM users WHERE id = '$userIDEscaped'";
 		
 		if ($result = $mysqli->query($sql))
 		{
