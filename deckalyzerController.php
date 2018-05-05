@@ -55,7 +55,7 @@
 					break;
 				default: // 'cardlist'
 					//list($orderBy, $orderDirection) = $this->model->getOrdering();
-					list($cards, $error) = $this->model->getCardCollection(this->model->getUser());
+					list($cards, $error) = $this->model->getCardCollection($this->model->getUser());
 					if ($error) {
 						$this->message = $error;
 					}
