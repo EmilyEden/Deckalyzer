@@ -41,16 +41,16 @@
 					$this->handleUpdateCard();
 					break;
 
-				case 'deleteD':
+				case 'deleteD'
 					$this->handleDeleteDeck();
 					break;
-				case 'addD':
+				case 'addD'
 					$this->handleAddDeck();
 					break;
-				case 'editD':
+				case 'editD'
 					$this->handleEditDeck();
 					break;
-				case 'updateD':
+				case 'updateD'
 					$this->handleUpdateDeck();
 					break;
 
@@ -66,19 +66,13 @@
 				case 'loginform':
 					print $this->views->loginFormView($this->message);
 					break;
-				default: 
+				default: // 'cardlist'
+					//list($orderBy, $orderDirection) = $this->model->getOrdering();
 					list($cards, $error) = $this->model->getCardCollection();
 					if ($error) {
 						$this->message = $error;
 					}
-					//print $this->views->cardListView($cards, $orderBy, $orderDirection, $this->message);
-					
-					list($decks, $error) = $this->model->getDeckCollection();
-					if($error)
-					{
-						$this->message = $error;	
-					}
-					print $this->views->cardListView($cards, $decks, $orderBy, $orderDirection, $this->message);
+					print $this->views->cardListView($cards, $orderBy, $orderDirection, $this->message);
 			}
 		}
 
@@ -145,7 +139,7 @@
 		//***************************************************************DECKS***************************************************
 
 		private function handleDeleteDeck() {
-			if ($error = $this->model->deleteDeck($_POST['id'])) {
+			if ($error = $this->model->deleteCard($_POST['id'])) {
 				$this->message = $error;
 			}
 			$this->view = 'cardlist';
