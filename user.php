@@ -13,7 +13,7 @@ class user {
 			return false;
 		}
 		
-		$loginIDEscaped = $mysqli->real_escape_string($userID);
+		$userIDEscaped = $mysqli->real_escape_string($userID);
 	
 		$sql = "SELECT * FROM users WHERE id = '$userIDEscaped'";
 		
