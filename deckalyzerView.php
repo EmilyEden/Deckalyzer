@@ -15,7 +15,7 @@
 
 			}
 
-			public function cardListView($cards, $orderBy = 'cardName', $orderDirection = 'asc', $message = '')
+			public function cardListView($user, $cards, $orderBy = 'cardName', $orderDirection = 'asc', $message = '')
 			{
 				$body = "<h1>Cards</h1>\n";
 
@@ -25,6 +25,8 @@
 				}
 
 				$body .= "<p><a class='taskButton' href='index.php?view=cardform'>+ Add Card</a></p>\n";
+				
+				
 				
 				if (count($cards) < 1)
 				{
@@ -75,7 +77,7 @@
 			return $this->page($body);
 		}
 
-		public function cardFormView($data = null, $message = '')
+		public function cardFormView($user, $data = null, $message = '')
 		{
 			$cardName = '';
 
