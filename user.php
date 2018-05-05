@@ -23,7 +23,7 @@ class user {
 			{
 				$user = $result->fetch_assoc();
 				$this->userName = $user['userName'];
-				$this->userID = $user['id'];
+				$this->userID = $user['userID'];
 			}
 			$result->close();
 			return true;
