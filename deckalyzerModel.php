@@ -32,7 +32,7 @@
 
 		public function loadUser($userId){
 			$user = new user();
-			if($user->load($userId, $this->mysqli)){
+			if($user->load($userId, $mysqli)){
 				$this->user = $user;
 				return array(true, "");
 			} else {
@@ -41,11 +41,13 @@
 			}
 		}
 
-		public function addCard($user, $data){
+		public function getUser() {
+			return $this->user;
+		}
+		
+		public function addCard($data){
 			$this->error = '';
-			
-			$this->user = $user;
-			
+
 			 if(!$this->user)
 			 {
 			 	$this->error = "No user specified. Could not add card";
@@ -110,11 +112,9 @@
 			return array($card, $this->error);
 		}
 
-		public function getCardCollection($user){
+		public function getCardCollection(){
 			$this->error = '';
 			$cards = array();
-			
-			$this->user->load($user->userID, $mysqli);
 
 			if (!$this->user) {
 				$this->error = "User not specified. Unable to get cards.";
@@ -160,14 +160,14 @@
 			}
 
 			$id = $data['id'];
-			if (! $id) 
+			if (! $id)
 			{
 				$this->error = "No card id. Unable to update card";
 				return $this->error;
 			}
 
 			$name = $data['name'];
-			if (!$name) 
+			if (!$name)
 			{
 				$this->error = "No card name. Unable to update card";
 				return $this->error;

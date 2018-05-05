@@ -15,7 +15,7 @@
 
 			}
 
-			public function cardListView($user, $cards, $orderBy = 'cardName', $orderDirection = 'asc', $message = '')
+			public function cardListView($cards, $orderBy = 'cardName', $orderDirection = 'asc', $message = '')
 			{
 				$body = "<h1>Cards</h1>\n";
 
@@ -25,9 +25,8 @@
 				}
 
 				$body .= "<p><a class='taskButton' href='index.php?view=cardform'>+ Add Card</a></p>\n";
-				
-				
-				
+				$body .= "<p><a class='taskButton' href='index.php?view=cardform'>+ Delete Card</a></p>\n";
+
 				if (count($cards) < 1)
 				{
 					$body .= "<p>You don't have cards loser.</p>\n";
@@ -35,9 +34,10 @@
 				}
 
 				$body .= "<table>\n";
-				$body .= "<tr><th>Delete</th><th>Edit</th>";
+				$body .= "<tr><th>delete</th><th>for trade</th>";
 
-				$columns = array(array('name' => 'cardName', 'label' => 'Card Name'));
+				$columns = array(array('name' => 'cardName', 'label' => 'Card Name'),
+								 array('name' => 'wishlist', 'label' => 'Wishlist'));
 
 
 
@@ -69,7 +69,7 @@
 					$body .= "<tr>";
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
-					$body .= "<td>$cardName</td>";
+					$body .= "<td>$cardName</td><td>$ownerId</td>";
 					$body .= "</tr>\n";
                 }
 			$body .= "</table>\n";
@@ -77,7 +77,7 @@
 			return $this->page($body);
 		}
 
-		public function cardFormView($user, $data = null, $message = '')
+		public function cardFormView($data = null, $message = '')
 		{
 			$cardName = '';
 
@@ -103,7 +103,7 @@ EOT1;
 				$html .= "<p class='message'>$message</p>\n";
 			}
 
-			$html .= "<form action='index.php?view=cardhome' method='post'>";
+			$html .= "<form action='index.php' method='post'>";
 
 			if($data['id'])
 			{
@@ -128,7 +128,7 @@ EOT2;
 		
 		public function loginFormView($message = '')
 		{			
-			$body = "<h1>Cards Login Page</h1>\n";
+			$body = "<h1>Tasks</h1>\n";
 			
 			if ($message)
 			{
@@ -139,17 +139,17 @@ EOT2;
 <form action='index.php' method='post'>
 <input type='hidden' name='action' value='login' />
 <p>Select User<br />
-	<select name="userId">
+	<select>
 		<option value="1">Emily Eden</option>
 		<option value="2">Warren Allen</option>
 		<option value="3">Luke Fisher</option>
 		<option value="4">Dale Musser</option>
+		<option value="5">Boo the Dog</option>
 	</select>
 	
 <input type="submit" name='Submit' value="Login">
 </form>
 EOT;
-			$selectOption = $_POST['userId'];
 			return $this->page($body);
 			
 		}

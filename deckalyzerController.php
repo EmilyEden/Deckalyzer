@@ -16,7 +16,7 @@
 			$this->model = new deckalyzerModel();
 			$this->views = new deckalyzerView();
 
-			$this->view = $_GET['view'] ? $_GET['view'] : 'loginform';
+			$this->view = $_GET['view'] ? $_GET['view'] : 'cardlist';
 			$this->action = $_POST['action'];
 		}
 
@@ -40,26 +40,22 @@
 				case 'update':
 					$this->handleUpdateCard();
 					break;
-				case 'login':
-					$this->handleLogin();
-					break;
 
 			}
 
 			switch($this->view) {
-				case 'loginform':
-					print $this->views->loginFormView($this->data, $this->message);
-					break;
 				case 'cardform':
-					print $this->views->cardFormView($this->model->getUser(), $this->data, $this->message);
+					print $this->views->cardFormView($this->data, $this->message);
 					break;
+				case 'loginform':
+					print $this->views->loginFormView($this->message);
 				default: // 'cardlist'
 					//list($orderBy, $orderDirection) = $this->model->getOrdering();
-					list($cards, $error) = $this->model->getCardCollection($this->model->getUser());
+					list($cards, $error) = $this->model->getCardCollection();
 					if ($error) {
 						$this->message = $error;
 					}
-					print $this->views->cardListView($this->model->getUser(), $cards, $orderBy, $orderDirection, $this->message);
+					print $this->views->cardListView($cards, $orderBy, $orderDirection, $this->message);
 			}
 		}
 
@@ -88,7 +84,7 @@
 				return;
 			}
 
-			$error = $this->model->addCard($this->model->getuser(),$_POST);
+			$error = $this->model->addCard($_POST);
 			if ($error) {
 				$this->message = $error;
 				$this->view = 'cardform';
