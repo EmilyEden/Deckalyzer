@@ -41,7 +41,7 @@
 			}
 		}
 
-		public function addCard($data){
+		public function addCard($user, $data){
 			$this->error = '';
 
 			 if(!$this->user)
@@ -108,9 +108,11 @@
 			return array($card, $this->error);
 		}
 
-		public function getCardCollection(){
+		public function getCardCollection($user){
 			$this->error = '';
 			$cards = array();
+			
+			$this->user->load($user->userID, $mysqli);
 
 			if (!$this->user) {
 				$this->error = "User not specified. Unable to get cards.";
