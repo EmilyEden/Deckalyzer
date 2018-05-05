@@ -147,7 +147,7 @@
 			}
 
 			$name = $data['name'];
-			if (! $title) {
+			if (! $name) {
 				$this->error = "No card name. Unable to update card";
 				return $this->error;
 			}
