@@ -59,7 +59,7 @@
 					if ($error) {
 						$this->message = $error;
 					}
-					print $this->views->cardListView($cards, $orderBy, $orderDirection, $this->message);
+					print $this->views->cardListView($this->user->getUser(), $cards, $orderBy, $orderDirection, $this->message);
 			}
 		}
 
