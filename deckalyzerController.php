@@ -51,7 +51,7 @@
 					print $this->views->loginFormView($this->data, $this->message);
 					break;
 				case 'cardform':
-					print $this->views->cardFormView($this->user->getUser(), $this->data, $this->message);
+					print $this->views->cardFormView($this->model->getUser(), $this->data, $this->message);
 					break;
 				default: // 'cardlist'
 					//list($orderBy, $orderDirection) = $this->model->getOrdering();
@@ -59,7 +59,7 @@
 					if ($error) {
 						$this->message = $error;
 					}
-					print $this->views->cardListView($this->user->getUser(), $cards, $orderBy, $orderDirection, $this->message);
+					print $this->views->cardListView($this->model->getUser(), $cards, $orderBy, $orderDirection, $this->message);
 			}
 		}
 
