@@ -43,24 +43,27 @@
 		public function addCard($data){
 			$this->error = '';
 
-			// if(!$this->user){
-			// 	$this->error = "No user specified. Could not add card";
-			// 	return $this->error;
-			// }
+			 if(!$this->user)
+			 {
+			 	$this->error = "No user specified. Could not add card";
+			 	return $this->error;
+			 }
 
 			$name = $data['name'];
-			if(!$name){
+			if(!$name)
+			{
 				$this->error = "No card name specified. Could not add card";
 				return $this->error;
 			}
 
 			$nameEscaped = $this->mysqli->real_escape_string($name);
-			$userIDEscaped = $this->mysqli->real_escape_string(1);//THIS IS HARD CODED!!!!!!
+			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 
 
 			$sql = "INSERT INTO cards (name, ownerId) VALUES ('$nameEscaped', '$userIDEscaped')";
 
-			if(!$result = $this->mysqli->query($sql)){
+			if(!$result = $this->mysqli->query($sql))
+			{
 				$this->error = $this->mysqli->error;
 			}
 
@@ -71,12 +74,14 @@
 			$this->error = '';
 			$card = null;
 
-			// if (!$this->user) {
-			// 	$this->error = "User not specified. Unable to get card.";
-			// 	return $this->error;
-			// }
+			if (!$this->user)
+			{
+			 	$this->error = "User not specified. Unable to get card.";
+			 	return $this->error;
+			}
 
-			if (!$this->mysqli) {
+			if (!$this->mysqli)
+			{
 				$this->error = "No connection to database. Unable to retrieve card";
 				return array($card, $this->error);
 			}
@@ -87,7 +92,7 @@
 			}
 
 			$idEscaped = $this->mysqli->real_escape_string($id);
-			$userIDEscaped = $this->mysqli->real_escape_string(1); //HARDCODED FOR TESTING
+			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 
 			$sql = "SELECT * FROM cards WHERE ownerId = $userIDEscaped AND id = '$idEscaped'";
 			if ($result = $this->mysqli->query($sql)) {
@@ -106,10 +111,10 @@
 			$this->error = '';
 			$cards = array();
 
-			// if (!$this->user) {
-			// 	$this->error = "User not specified. Unable to get cards.";
-			// 	return $this->error;
-			// }
+			if (!$this->user) {
+				$this->error = "User not specified. Unable to get cards.";
+			 	return $this->error;
+			}
 
 			if (!$this->mysqli) {
 				$this->error = "No connection to database. Could not get cards";
@@ -117,7 +122,7 @@
 			}
 
 			$nameEscaped = $this->mysqli->real_escape_string($name);
-			$userIDEscaped = $this->mysqli->real_escape_string(1);//THIS IS HARD CODED!!!!!!
+			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 
 			$sql = "SELECT * FROM cards WHERE ownerId = $userIDEscaped";
 			if($result = $this->mysqli->query($sql)){
@@ -137,59 +142,68 @@
 		public function editCard($data){
 			$this->error = '';
 
-			// if (!$this->user) {
-			// 	$this->error = "User not specified. Unable to update card.";
-			// 	return $this->error;
-			// }
+			if(!$this->user)
+			{
+			 	$this->error = "User not specified. Unable to update card.";
+				return $this->error;
+			}
 
-			if (! $this->mysqli) {
+			if(! $this->mysqli)
+			{
 				$this->error = "No connection to database. Unable to update card.";
 				return $this->error;
 			}
 
 			$id = $data['id'];
-			if (! $id) {
+			if (! $id) 
+			{
 				$this->error = "No card id. Unable to update card";
 				return $this->error;
 			}
 
 			$name = $data['name'];
-			if (!$name) {
+			if (!$name) 
+			{
 				$this->error = "No card name. Unable to update card";
 				return $this->error;
 			}
 
 			$idEscaped = $this->mysqli->real_escape_string($id);
 			$nameEscaped = $this->mysqli->real_escape_string($name);
-			$userIDEscaped = $this->mysqli->real_escape_string(1);//HARD CODED FOR TESTING
+			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 
 			$sql = "UPDATE cards SET name='$nameEscaped' WHERE ownerId = $userIDEscaped AND id = $idEscaped";
-			if (! $result = $this->mysqli->query($sql) ) {
+			if (! $result = $this->mysqli->query($sql))
+			{
 				$this->error = $this->mysqli->error;
 			}
 
 			return $this->error;
 		}
 
-		public function deleteCard($id){
+		public function deleteCard($id)
+		{
 			$this->error = '';
-			// if (!$this->user){
-			// 	$this->error = "User not specified. Unable to delete card.";
-			// 	return $this->error;
-			// }
+			if (!$this->user)
+			{
+			 	$this->error = "User not specified. Unable to delete card.";
+			 	return $this->error;
+			}
 
-			if(!$this->mysqli){
+			if(!$this->mysqli)
+			{
 				$this->error = "No connection to database. Unable to delete card.";
 				return $this->error;
 			}
 
-			if(!$id){
+			if(!$id)
+			{
 				$this->error = "No id specified for card to delete.";
 				return $this->error;
 			}
 
 			$idEscaped = $this->mysqli->real_escape_string($id);
-			$userIDEscaped = $this->mysqli->real_escape_string(1);//HARD CODED
+			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 			$sql = "DELETE FROM cards WHERE ownerID = $userIDEscaped AND id = $idEscaped";
 
 			if (!$result = $this->mysqli->query($sql)){
