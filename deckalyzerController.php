@@ -41,16 +41,16 @@
 					$this->handleUpdateCard();
 					break;
 
-				case 'deleteD'
+				case 'deleteD':
 					$this->handleDeleteDeck();
 					break;
-				case 'addD'
+				case 'addD':
 					$this->handleAddDeck();
 					break;
-				case 'editD'
+				case 'editD':
 					$this->handleEditDeck();
 					break;
-				case 'updateD'
+				case 'updateD':
 					$this->handleUpdateDeck();
 					break;
 
