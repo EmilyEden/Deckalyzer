@@ -40,6 +40,9 @@
 				case 'update':
 					$this->handleUpdateCard();
 					break;
+				case 'login':
+					$this->handleLogin();
+					break;
 
 			}
 
