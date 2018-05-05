@@ -1,7 +1,7 @@
 <?php
 
-	require('cardsController.php');
+	require('deckalyzerController.php');
 	
-	$controller = new cardsController();
+	$controller = new deckalyzerController();
 	$controller->run();
 ?>
