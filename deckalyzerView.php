@@ -146,6 +146,8 @@ EOT2;
 		<option value="4">Dale Musser</option>
 		<option value="5">Boo the Dog</option>
 	</select>
+	
+<input type="submit" name='Submit' value="Login">
 </form>
 EOT;
 			return $this->page($body);
