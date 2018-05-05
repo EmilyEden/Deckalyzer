@@ -32,7 +32,7 @@
 
 		public function loadUser($userId){
 			$user = new user();
-			if($user->load($userId)){
+			if($user->load($userId, $mysqli)){
 				$this->user = $user;
 				return array(true, "");
 			} else {
