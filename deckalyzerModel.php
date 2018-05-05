@@ -156,7 +156,7 @@
 			$nameEscaped = $this->mysqli->real_escape_string($name);
 			$userIDEscaped = $this->mysqli->real_escape_string(1);//HARD CODED FOR TESTING
 
-			$sql = "UPDATE cards SET name='$nameEscaped', WHERE ownerId = $userIDEscaped AND id = $idEscaped";
+			$sql = "UPDATE cards SET name='$nameEscaped' WHERE ownerId = $userIDEscaped AND id = $idEscaped";
 			if (! $result = $this->mysqli->query($sql) ) {
 				$this->error = $this->mysqli->error;
 			}
