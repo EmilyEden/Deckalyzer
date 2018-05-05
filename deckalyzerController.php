@@ -66,13 +66,19 @@
 				case 'loginform':
 					print $this->views->loginFormView($this->message);
 					break;
-				default: // 'cardlist'
-					//list($orderBy, $orderDirection) = $this->model->getOrdering();
+				default: 
 					list($cards, $error) = $this->model->getCardCollection();
 					if ($error) {
 						$this->message = $error;
 					}
-					print $this->views->cardListView($cards, $orderBy, $orderDirection, $this->message);
+					//print $this->views->cardListView($cards, $orderBy, $orderDirection, $this->message);
+					
+					list($decks, $error) = $this->model->getDeckCollection();
+					if($error)
+					{
+						$this->message = $error;	
+					}
+					print $this->views->cardListView($cards, $decks, $orderBy, $orderDirection, $this->message);
 			}
 		}
 
