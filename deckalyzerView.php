@@ -36,8 +36,8 @@
 				$body .= "<span><table>\n";
 				$body .= "<tr><th>Delete</th><th>Edit</th>";
 
-				$columns = array(array('name' => 'cardName', 'label' => 'Card Name')
-								(array('name' => 'numOwned', 'label' => 'Quantity')
+				$columns = array(array('name' => 'cardName', 'label' => 'Card Name'),
+								(array('name' => 'numOwned', 'label' => 'Quantity'),
 								(array('name' => 'forTrade', 'label' => 'For Trade?'));
 
 				foreach ($columns as $column)
@@ -78,8 +78,8 @@
 			$body .= "<span><table>\n";
 			$body .= "<tr><th>Delete</th><th>Edit</th>";
 			
-			$columns = array(array('name' => 'deckName', 'label' => 'Deck Name')
-							(array('name' => 'format', 'label' => 'Format')
+			$columns = array(array('name' => 'deckName', 'label' => 'Deck Name'),
+							(array('name' => 'format', 'label' => 'Format'),
 							(array('name' => 'numWins', 'label' => 'Victories'));
 			
 			foreach ($columns as $column)
