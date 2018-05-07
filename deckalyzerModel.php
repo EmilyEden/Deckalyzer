@@ -331,7 +331,7 @@
 			$numWinsEscaped = $this->mysqli->real_escape_string($data['numWins']);
 			$formatEscaped = $this->mysqli->real_escape_string($data['format']);
 
-			$sql = "UPDATE decks SET name = '$nameEscaped', numWins = '$numWinsEscaped' format = '$formatEscaped' WHERE ownerId = $userIDEscaped AND id = $idEscaped";
+			$sql = "UPDATE decks SET name = '$nameEscaped', numWins = '$numWinsEscaped', format = '$formatEscaped' WHERE ownerId = $userIDEscaped AND id = $idEscaped";
 			if (! $result = $this->mysqli->query($sql) ) {
 				$this->error = $this->mysqli->error;
 			}
