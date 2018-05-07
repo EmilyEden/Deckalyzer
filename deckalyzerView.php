@@ -17,7 +17,7 @@
 
 			public function cardListView($cards, $decks, $orderBy = 'cardName', $orderDirection = 'asc', $message = '')
 			{
-				$body = "<h1>Cards</h1>\n";
+				$body = "<h1>Cards and Decks</h1>\n";
 
 				if ($message)
 				{
@@ -27,9 +27,9 @@
 				$body .= "<p><a class='taskButton' href='index.php?view=cardform'>+ Add Card</a>";
 				$body .= "<p><a class='taskButton' href='index.php?view=deckform'>+ Add Deck</a></p>\n";
 
-				if (count($cards) < 1)
+				if (count($cards) < 1 && count($decks) <1)
 				{
-					$body .= "<p>You don't have cards! You can fix that by clicking +Add Card. Or don't. Whatever.</p>\n";
+					$body .= "<p>You don't have cards! You can fix that by clicking Add Card. Or don't.</p>\n"; 
 					return $body;
 				}
 
@@ -100,8 +100,8 @@
 
 
 					$body .= "<tr>";
-					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
-					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
+					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='deleteD' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
+					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='editD' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
 					$body .= "<td>$deckName</td>";
 					$body .= "</tr>\n";
                 }
