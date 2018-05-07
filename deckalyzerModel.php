@@ -55,10 +55,12 @@
 			}
 
 			$nameEscaped = $this->mysqli->real_escape_string($name);
-			$userIDEscaped = $this->mysqli->real_escape_string(1);//THIS IS HARD CODED!!!!!!
+			$userIDEscaped = $this->mysqli->real_escape_string(1);//Multi-user is a stretch feature. For now we will assume there is only one user.
+			$forTradeEscaped = $this->mysqli->real_escape_string($data['forTrade']);
+			$numOwnedEscaped = $this->mysqli->real_escape_string($data['numOwned']);
 
 
-			$sql = "INSERT INTO cards (name, ownerId) VALUES ('$nameEscaped', '$userIDEscaped')";
+			$sql = "INSERT INTO cards (name, ownerId, forTrade, numOwned) VALUES ('$nameEscaped', '$userIDEscaped', '$forTradeEscaped', '$numOwnedEscaped')";
 
 			if(!$result = $this->mysqli->query($sql)){
 				$this->error = $this->mysqli->error;
@@ -162,8 +164,10 @@
 			$idEscaped = $this->mysqli->real_escape_string($id);
 			$nameEscaped = $this->mysqli->real_escape_string($name);
 			$userIDEscaped = $this->mysqli->real_escape_string(1);//HARD CODED FOR TESTING
+			$forTradeEscaped = $this->mysqli->real_escape_string($data['forTrade']);
+			$numOwnedEscaped = $this->mysqli->real_escape_string($data['numOwned']);
 
-			$sql = "UPDATE cards SET name='$nameEscaped' WHERE ownerId = $userIDEscaped AND id = $idEscaped";
+			$sql = "UPDATE cards SET name = '$nameEscaped', forTrade = '$forTradeEscaped', numOwned = '$numOwnedEscaped' WHERE ownerId = $userIDEscaped AND id = $idEscaped";
 			if (! $result = $this->mysqli->query($sql) ) {
 				$this->error = $this->mysqli->error;
 			}
@@ -217,9 +221,10 @@
 
 			$nameEscaped = $this->mysqli->real_escape_string($name);
 			$userIDEscaped = $this->mysqli->real_escape_string(1);//THIS IS HARD CODED!!!!!!
+			$numWinsEscaped = $this->mysqli->real_escape_string($data['numWins']);
+			$formatEscaped = $this->mysqli->real_escape_string($data['format']);
 
-
-			$sql = "INSERT INTO decks (name, ownerId) VALUES ('$nameEscaped', '$userIDEscaped')";
+			$sql = "INSERT INTO decks (name, ownerId, numWins, format) VALUES ('$nameEscaped', '$userIDEscaped', '$numWinsEscaped', '$formatEscaped')";
 
 			if(!$result = $this->mysqli->query($sql)){
 				$this->error = $this->mysqli->error;
@@ -323,8 +328,10 @@
 			$idEscaped = $this->mysqli->real_escape_string($id);
 			$nameEscaped = $this->mysqli->real_escape_string($name);
 			$userIDEscaped = $this->mysqli->real_escape_string(1);//HARD CODED FOR TESTING
+			$numWinsEscaped = $this->mysqli->real_escape_string($data['numWins']);
+			$formatEscaped = $this->mysqli->real_escape_string($data['format']);
 
-			$sql = "UPDATE decks SET name='$nameEscaped' WHERE ownerId = $userIDEscaped AND id = $idEscaped";
+			$sql = "UPDATE decks SET name = '$nameEscaped', numWins = '$numWinsEscaped' format = '$formatEscaped' WHERE ownerId = $userIDEscaped AND id = $idEscaped";
 			if (! $result = $this->mysqli->query($sql) ) {
 				$this->error = $this->mysqli->error;
 			}
