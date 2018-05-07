@@ -10,9 +10,8 @@ This application is a very simple application that allows a Magic the Gathering 
 
 The cards table allows you to delete and edit cards, displays how many of one card you might have, and allows you to see if you want to trade that particular card. The deck table allows deleting and editing functions as well, and allows you to see the format of the deck (for example EDH, casual, modern, or standard) and how many times you have one a match with that deck.
 
-Schema: 
-
-ERD:
+Schema/ERD:
+https://docs.google.com/document/d/1dZv72XBlXeWExyTTT_qcMdTsUmjMrM8WfNRwh_c0Pyk/edit?usp=sharing
 
 CRUD Explaination:
 
