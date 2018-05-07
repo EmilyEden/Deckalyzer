@@ -29,7 +29,7 @@
 
 				if (count($cards) < 1 && count($decks) <1)
 				{
-					$body .= "<p>You don't have cards! You can fix that by clicking Add Card. Or don't.</p>\n"; 
+					$body .= "<p>You don't have cards! You can fix that by clicking Add Card. Or don't.</p>\n";
 					return $body;
 				}
 
@@ -74,14 +74,14 @@
 					$body .= "</tr>\n";
                 }
 			$body .= "</table></span>\n";
-			
+
 			$body .= "<span><table>\n";
 			$body .= "<tr><th>Delete</th><th>Edit</th>";
-			
+
 			$columns = array(array('name' => 'deckName', 'label' => 'Deck Name'),
 							 array('name' => 'format', 'label' => 'Format'),
 							 array('name' => 'numWins', 'label' => 'Victories'));
-			
+
 			foreach ($columns as $column)
 				{
 					$name = $column['name'];
@@ -99,7 +99,7 @@
 					}
 					$body .= "<th><a class='order' href='index.php?orderby=$name'>$label</a></th>";
 				}
-				
+
 			foreach($decks as $deck)
 				{
 					$id = $deck['id'];
@@ -115,9 +115,9 @@
 					$body .= "<td>$numWins</td>";
 					$body .= "</tr>\n";
                 }
-			
-			
-			
+
+
+
 			$body .= "</table></span>\n";
 
 			return $this->page($body);
@@ -167,8 +167,8 @@ EOT1;
 
 			$html .= <<<EOT2
 	<p>Card Name<br />
-	<input type="text" name="name" value="$name" placeholder="Card Name" maxlength="255" size="80"></p>
-	<input type="checkbox" name="forTrade" value="1">Is this card for trade?</p>
+	<input type="text" name="name" value="$cardName" placeholder="Card Name" maxlength="255" size="80"></p>
+	<input type="checkbox" name="forTrade" value="$forTrade">Is this card for trade?</p>
 	<input type="text" name="numOwned" value="$numOwned" maxlength="4" size="8">How many of these cards do you own?</p>
 	<input type="submit" name='submit' value="Submit">
 </form>
@@ -177,8 +177,8 @@ EOT1;
 EOT2;
 			print $html;
 		}
-		
-		
+
+
 		public function deckFormView($data = null, $message = '')
 		{
 			$deckName = '';
@@ -188,6 +188,8 @@ EOT2;
 			if($data)
 			{
 				$deckName = $data['deckName'];
+				$format = $data['format'];
+				$numWins = ['numWins'];
 			}
 
 			$html = <<<EOT1
@@ -221,7 +223,7 @@ EOT1;
 
 			$html .= <<<EOT2
 	<p>Deck Name<br />
-	<input type="text" name="name" value="$name" placeholder="Deck Name" maxlength="255" size="80"></p>
+	<input type="text" name="name" value="$deckName" placeholder="Deck Name" maxlength="255" size="80"></p>
 	<input type="text" name="format" value="$format" placeholder="Format" maxlength="255" size="80"></p>
 	<input type ="text" name="numWins" value="$numWins" maxlength="4" size="8">How many victories have you claimed with this deck?</p>
 	<input type="submit" name='submit' value="Submit">
